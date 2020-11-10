@@ -1,0 +1,95 @@
+#Exercise 1
+#Given the list of names stored in the variable names, write a loop that cleans the names inside the list by trimming all whitespace at the start and end of the names. 
+#Print the cleaned list.
+
+
+names = [' Finley', '  Alex   ', 'Zach']
+for i in range(len(names)):
+    names[i] = names[i].strip()
+print(names)
+
+#Expected Output: ['Finley', 'Alex', 'Zach']
+
+
+#Exercise 2
+#Write a function called truthy that takes a single list as a parameter and returns a new list that removes all values that are not 'truthy' (empty string, None, etc.)
+
+def truthy(list):
+    updated_List = []
+    for element in list:
+        if element:
+            updated_List.append(element)
+    return updated_List
+test_1 = [1, 2, 3, None, 0, 4]
+print(truthy(test_1))
+
+#Expected Output: [1, 2, 3, 4]
+
+
+#Exercise 3
+#Cleaning Data isn't always about removing bad data, sometimes it's about picking out data that showcases something special. 
+#You have three dictionaries that contain information about stock prices from the past three days based on the company's stock symbol.
+#Write a function called growing that takes in all three dictionaries as parameters and returns a list of symbol names for companies whose stocks only went up across the three days (values only increased across each day).
+
+day_1 = {
+    'BST': 501,
+    'JSX': 120,
+    'EJS': 145,
+    'PIP': 681,
+    'EJS': 320,
+}
+
+day_2 = {
+    'BST': 503,
+    'JSX': 118,
+    'EJS': 148,
+    'PIP': 685,
+    'EJS': 320,
+}
+
+day_3 = {
+    'BST': 504,
+    'JSX': 121,
+    'EJS': 146,
+    'PIP': 689,
+    'EJS': 310
+}
+
+def growing(day_1, day_2, day_3):
+    Stocks = []
+    for stock in day_1.keys():
+        v1 = day_1[k]
+        v2 = day_2[k]
+        v3 = day_3[k]
+        if (v1 < v2) and (v2 < v3):
+            Stocks.append(k)
+    return Stocks
+   
+#Expected Output: ['BST', 'PIP']
+
+
+#Exercise 4
+#You're given a string that represents CSV (comma seperated values) data.
+#The first row contains the names of each piece of data, and the rows below contain the values for three entries. 
+#Without using any of Python's built-in tools, write a function called parse that accepts this string and returns a list of dictionaries, where each one represents the data in one row.
+
+def parse(data):
+    lines = data.splitlines()
+    results = []
+    header_row = lines.pop(0).split(',')
+    for line in lines:
+        values = line.split(',')
+        row = {}
+        for i in range(len(header_row)):
+            key = header_row[i].strip()
+            val = values[i].strip()
+            if val.isdigit():
+                val = int(val)
+            row[key] = val
+        results.append(row)
+    return results
+
+   
+   
+
+growing(day_1, day_2, day_3)
